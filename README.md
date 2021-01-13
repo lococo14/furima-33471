@@ -1,14 +1,14 @@
 ## Users
 
-|Column          |Type    |Options    |
-|----------------|--------|-----------|
-|email           |string  |null: false|
-|password        |string  |null: false|
-|last_name       |string  |null: false|
-|first_name      |string  |null: false|
-|last_name_kana  |string  |null: false|
-|first_name_kana |string  |null: false|
-|birth_day       |integer |null: false|
+|Column             |Type    |Options    |
+|-------------------|--------|-----------|
+|email              |string  |null: false|
+|encrypted_password |string  |null: false|
+|last_name          |string  |null: false|
+|first_name         |string  |null: false|
+|last_name_kana     |string  |null: false|
+|first_name_kana    |string  |null: false|
+|birth_day          |integer |null: false|
 
 ### Association
 --has_many :items
@@ -40,7 +40,7 @@
 
 ### Association
 --belongs_to :user
---has_one    :item
+--belongs_to :item
 
 ## Shipping_addresses
 |Column            |Type       |Options                       |
@@ -54,6 +54,5 @@
 |order_id          |references |null: false, foreign_key: true|
 
 ### Association
---belongs_to :prefecture
 --has_one    :order
 
