@@ -1,7 +1,19 @@
 class Item < ApplicationRecord
- 
-  validates :category_id, :condition_id, :shipping_date_id, :shipping_payer_id, :prefecture_id, numericality: { other_than: 1 }
-  
+
+  with_options presence: true do 
+    validates :item_name
+    validates :description
+    validates :price
+    validates :user
+  with_options numericality: { other_than: 1 } do 
+    validates :category_id    
+    validates :condition_id
+    validates :shipping_date_id
+    validates :shipping_payer_id
+    validates :prefecture_id
+  end 
+end  
+
   belongs_to :user 
   has_one_attached :image
 
