@@ -69,5 +69,32 @@ RSpec.describe Item, type: :model do
     @item.valid?
     expect(@item.errors.full_messages).to include("Price is invalid. Input half-width number.")
   end  
+  it 'category_idに0が選択された場合では出品できないこと' do
+    @item.category_id = 0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Category must be other than 0")
+  end
+  it 'condition_idに0が選択された場合では出品できないこと' do
+    @item.condition_id = 0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Condition must be other than 0")
+  end
+  it 'shipping_date_idに0が選択された場合では出品できないこと' do
+    @item.shipping_date_id = 0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Shipping date must be other than 0")
+  end
+  it 'shipping_payer_idに0が選択された場合では出品できないこと' do
+    @item.shipping_payer_id = 0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Shipping payer must be other than 0")
+  end
+  it 'prefecture_idに0が選択された場合では出品できないこと' do
+    @item.prefecture_id = 0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+  end
+
+
  end 
 end
