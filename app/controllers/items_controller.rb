@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.valid?
-       @item.save
+      @item.save
       redirect_to action: :index
     else
       render :new
@@ -29,11 +29,16 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-     if @item.update(item_params)
+    if @item.update(item_params)
       redirect_to action: :show
     else
       render :edit
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    redirect_to root_path if item.destroy
   end
 
   private
@@ -45,12 +50,10 @@ class ItemsController < ApplicationController
 
   def find_item
     @item = Item.find(params[:id])
-  end  
+  end
 
- def move_to_index
-   item = Item.find(params[:id])
-   unless user_signed_in? && current_user.id == item.user_id
-   redirect_to action: :index 
-   end
- end 
+  def move_to_index
+    item = Item.find(params[:id])
+    redirect_to action: :index unless user_signed_in? && current_user.id == item.user_id
+  end
 end
