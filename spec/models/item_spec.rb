@@ -5,10 +5,14 @@ RSpec.describe Item, type: :model do
     before do
     @item = FactoryBot.build(:item)
     end
-   
+
+context '内容に問題がない場合' do
   it '全ての値が正しく入力されていれば出品ができること' do
     expect(@item).to be_valid
   end
+end
+
+context '内容に問題がある場合' do
   it 'imageが空では出品できないこと' do
     @item.image = nil
     @item.valid?
@@ -94,7 +98,7 @@ RSpec.describe Item, type: :model do
     @item.valid?
     expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
   end
-
+end
 
  end 
 end
