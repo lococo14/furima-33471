@@ -8,7 +8,7 @@ class OrderAddress
    validates   :prefecture_id,  numericality: { other_than: 0, message: "can't be blank" }
    validates   :city
    validates   :street_name
-   validates   :phone_number, format: { with: /\A\d{10,11}\z/ , message: 'is invalid. Input with only numbers'}
+   validates   :phone_number, format: { with: /\A\d{10,11}\z/ , message: 'is invalid. Input only with valid numbers'}
   end 
   
   def save
