@@ -16,4 +16,5 @@ class User < ApplicationRecord
   validates_format_of :password, with: PASSWORD_REGEX, message: 'is invalid. Input at least one number, and one alphabet.'
 
   has_many :items
+  has_many :orders
 end
