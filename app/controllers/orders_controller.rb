@@ -2,15 +2,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index
   before_action :sold_out
+  before_action :find_item
 
   def index
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
     @order_address = OrderAddress.new(address_params)
-    @item = Item.find(params[:item_id])
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -21,6 +20,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def find_item
+    @item = Item.find(params[:item_id])
+  end
 
   def address_params
     params.require(:order_address).permit(:zip_code, :prefecture_id, :city, :street_name, :building_name, :phone_number).merge(

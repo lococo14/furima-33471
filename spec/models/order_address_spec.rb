@@ -3,11 +3,14 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe '購入機能' do
     before do
-      @order_address = FactoryBot.build(:order_address)
+      @buyer = FactoryBot.create(:user)
+      @seller = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item,user_id: @seller.id )
+      @order_address = FactoryBot.build(:order_address,user_id: @buyer.id,item_id: @item.id)
     end
 
     context '商品の購入ができるとき' do
-      it '必要な値が全て入力されていれば購入できること' do
+      it '必要な値が全て入力されていれば購入できること' do 
         expect(@order_address).to be_valid
       end
       it 'building_nameは空でも購入できること' do
@@ -62,6 +65,21 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
+      it 'prefecture_idが0では購入できないこと' do 
+        @order_address.prefecture_id = 0
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'item_idが空では購入できないこと' do 
+        @order_address.item_id = nil 
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'user_idが空では購入できないこと' do 
+        @order_address.user_id = nil 
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end       
     end
   end
 end
