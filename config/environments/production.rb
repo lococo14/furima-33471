@@ -5,7 +5,10 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = ['https://furima-33471.herokuapp.com', 'http://furima-33471.herokuapp.com']
 
  
-  
+  ActionCable.server.config.disable_request_forgery_protection = true
+  config.action_cable.url = "ws://18.178.31.86/cable" 
+  config.action_cable.allowed_request_origins = ['http://18.178.31.86']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
