@@ -1,3 +1,4 @@
+if (document.URL.match( /new/ ) || document.URL.match( /edit/ )){
 window.addEventListener('load', () => {
   const priceInput = document.getElementById("item-price");
   priceInput.addEventListener("input", () => {
@@ -9,3 +10,4 @@ window.addEventListener('load', () => {
    profit.innerHTML = Math.floor(inputValue - addTaxValue);
   })
 });
+}
